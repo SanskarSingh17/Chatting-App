@@ -1,0 +1,33 @@
+# Python
+*.pyc
+__pycache__/
+env/
+venv/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+
+
+
+.env
+
+
+*.sql
+
+
+# React
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Build
+build/
+dist/
+
+.env
