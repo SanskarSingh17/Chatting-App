@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Register from './components/Register';
 import UserList from './components/UserList';
@@ -6,26 +7,19 @@ import InterestList from './components/InterestList';
 import Chat from './components/Chat';
 
 const App = () => {
-  const [token, setToken] = useState('');
-  const [receiverId, setReceiverId] = useState(null);
-
-  if (!token) {
-    return (
+  return (
+    <Router>
       <div>
         <h1>Welcome to InterestApp</h1>
-        <Login setToken={setToken} />
-        <Register />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/interests" element={<InterestList />} />
+          <Route path="/chat/:receiverId" element={<Chat />} />
+        </Routes>
       </div>
-    );
-  }
-
-  return (
-    <div>
-      <h1>Welcome to InterestApp</h1>
-      <UserList token={token} />
-      <InterestList token={token} />
-      {receiverId && <Chat token={token} receiverId={receiverId} />}
-    </div>
+    </Router>
   );
 };
 

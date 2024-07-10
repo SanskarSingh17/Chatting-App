@@ -1,3 +1,4 @@
+// Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -5,19 +6,22 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     axios.post('http://localhost:8000/register/', {
       username: username,
       password: password,
       email: email
     })
     .then(response => {
-      alert('Registration successful');
+      alert('Registration successful!');
     })
     .catch(error => {
-      console.error('There was an error registering!', error);
+      console.error('Error registering:', error);
+      setError('Registration failed. Please try again.'); // Display error message
     });
   };
 
@@ -36,6 +40,7 @@ const Register = () => {
         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
       </div>
       <button type="submit">Register</button>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </form>
   );
 };

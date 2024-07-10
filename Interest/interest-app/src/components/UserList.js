@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const UserList = ({ token }) => {
+const UserList = ({ token, setReceiverId }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:8000/users/', {
-      headers: { Authorization: `Token ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
       setUsers(response.data);
@@ -18,7 +18,7 @@ const UserList = ({ token }) => {
 
   const sendInterest = (userId) => {
     axios.post('http://localhost:8000/interests/', { receiver: userId }, {
-      headers: { Authorization: `Token ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
       alert('Interest sent!');
@@ -34,8 +34,9 @@ const UserList = ({ token }) => {
       <ul>
         {users.map(user => (
           <li key={user.id}>
-            {user.username} 
+            {user.username}
             <button onClick={() => sendInterest(user.id)}>Send Interest</button>
+            <button onClick={() => setReceiverId(user.id)}>Chat</button>
           </li>
         ))}
       </ul>

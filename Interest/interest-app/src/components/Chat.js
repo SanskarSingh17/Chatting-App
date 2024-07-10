@@ -1,3 +1,4 @@
+// Chat.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -6,28 +7,29 @@ const Chat = ({ token, receiverId }) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/messages/?receiver=${receiverId}`, {
-      headers: { Authorization: `Token ${token}` }
-    })
-    .then(response => {
-      setMessages(response.data);
-    })
-    .catch(error => {
-      console.error('There was an error fetching the messages!', error);
-    });
-  }, [token, receiverId]);
+    if (receiverId) {
+      axios.get(`http://localhost:8000/messages/?receiver=${receiverId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      .then(response => {
+        setMessages(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching messages:', error);
+      });
+    }
+  }, [receiverId, token]);
 
-  const sendMessage = (e) => {
-    e.preventDefault();
+  const handleSendMessage = () => {
     axios.post('http://localhost:8000/messages/', { receiver: receiverId, message: message }, {
-      headers: { Authorization: `Token ${token}` }
+      headers: { Authorization: `Bearer ${token}` }
     })
     .then(response => {
       setMessages([...messages, response.data]);
       setMessage('');
     })
     .catch(error => {
-      console.error('There was an error sending the message!', error);
+      console.error('Error sending message:', error);
     });
   };
 
@@ -35,16 +37,12 @@ const Chat = ({ token, receiverId }) => {
     <div>
       <h2>Chat</h2>
       <div>
-        {messages.map((msg, index) => (
-          <div key={index}>
-            <strong>{msg.sender.username}:</strong> {msg.message}
-          </div>
+        {messages.map((msg) => (
+          <div key={msg.id}>{msg.message}</div>
         ))}
       </div>
-      <form onSubmit={sendMessage}>
-        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} required />
-        <button type="submit">Send</button>
-      </form>
+      <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
+      <button onClick={handleSendMessage}>Send</button>
     </div>
   );
 };
