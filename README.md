@@ -31,7 +31,7 @@ This is a minimal full-stack application that demonstrates capabilities in both 
 ### Backend Setup
 
 **Clone the repository:**
-   1.git clone https://github.com/yourusername/Interest.git
+   1.git clone https://github.com/SanskarSingh17/Chatting-App
    `cd Interest`
    pip install -r requirements.txt
 2. **Create a virtual environment and activate it:**
