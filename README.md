@@ -6,12 +6,14 @@ This is a minimal full-stack application that demonstrates capabilities in both 
 ## Design 
 
 ### Backend Framework
-- **Django**: I’ve chosen Django for its robust features and easy to setting up a RESTful API using Django REST Framework (DRF).
-- **Django REST Framework**: For creating API endpoints efficiently.
+- Python 3.10+
+- Django 4.0+
+- Django REST Framework
+- djangorestframework-simplejwt
 
 ### Frontend Framework
 - **React**:I’ve used react for its component-bases architecture and easy to create dynamic UIs.
-
+    npm (Node Package Manager)
 
 ### Authentication
 - **JWT**: Using `SimpleJWT` for secure token-based authentication.
@@ -28,13 +30,17 @@ This is a minimal full-stack application that demonstrates capabilities in both 
 
 ### Backend Setup
 
-1. **Create a virtual environment and activate it:**
+**Clone the repository:**
+   1.git clone https://github.com/yourusername/Interest.git
+   `cd Interest`
+   pip install -r requirements.txt
+2. **Create a virtual environment and activate it:**
   `python -m venv env`
   `env\Scripts\activate`
-2. **Apply migrations**
+3. **Apply migrations**
   `python manage.py makemigrations`
   `python manage.py migrate`
-3. **Run the server**
+4. **Run the server**
   `python manage.py runserver`
 
 ### Frontend Setup
@@ -45,3 +51,18 @@ This is a minimal full-stack application that demonstrates capabilities in both 
   `npm install`
 3. **Run the server**
   `npm start`
+
+### Running the Application
+**Backend**
+1.Ensure the virtual environment is activated.
+2.Start the Django development server
+`python manage.py runserver`
+
+**Frontend**
+1.Ensure you are in the interest-app directory.
+2.Start the React development server:
+`npm start`
+
+
+Open your browser and navigate to http://127.0.0.1:8000/ For backend
+Open your browser and navigate to http://localhost:3000 to see the application.
